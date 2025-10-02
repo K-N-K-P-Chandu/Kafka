@@ -1,4 +1,4 @@
-# Kafka Python Demo: Orders Producer & Tracker
+# Kafka Demo: with python ('Orders', 'Producer' & 'Tracker')
 
 This guide helps you run a simple Kafka workflow locally using Docker and Python. It includes a producer (`producer.py`) that sends a sample order and a consumer (`tracker.py`) that reads and prints new orders from the `orders` topic.
 
@@ -9,7 +9,6 @@ This guide helps you run a simple Kafka workflow locally using Docker and Python
   - `producer.py` sends a JSON order to topic `orders`.
   - `tracker.py` consumes from `orders` and logs each order.
 - Why it’s useful:
-  - Decoupled services: producers and consumers don’t call each other directly.
   - Easy local testing for event-driven workflows.
 
 ## 2. Getting Started
