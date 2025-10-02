@@ -110,3 +110,20 @@ Notes:
   - Kafka docs: https://kafka.apache.org/documentation/
   - Confluent Python client: https://github.com/confluentinc/confluent-kafka-python
   - GitHub diagrams (Mermaid syntax support): https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams
+
+## 8. Important Notes
+
+- Version Compatibility:
+  - If you use a newer Kafka release, update the Docker image tag in `docker-compose.yaml` to match: `image: confluentinc/cp-kafka:<your-version>`.
+  - Check the running Kafka version inside the container: `docker exec -it kafka kafka-topics --version`.
+  - After changing the image version, recreate services: `docker-compose down -v && docker-compose up -d`.
+
+- Volume Path Configuration (Windows):
+  - This setup uses a Docker named volume (`kafka_kraft`), so no host path changes are required by default.
+  - If you prefer a bind mount to a specific Windows folder for persistence, replace the volume line with something like: `- C:\\Users\\<your-username>\\kafka-data:/var/lib/kafka/data`.
+  - Steps to validate and update:
+    - Create the host folder: `C:\Users\<your-username>\kafka-data`.
+    - In Docker Desktop, ensure the drive/folder is shared (Settings → Resources → File Sharing).
+    - Update `services.kafka.volumes` in `docker-compose.yaml` with your path.
+    - Recreate services: `docker-compose down` then `docker-compose up -d`.
+  - Verify the mount is active: `docker inspect kafka --format '{{json .Mounts}}'` and confirm `Source` points to your Windows path.
